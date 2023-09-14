@@ -1,0 +1,40 @@
+version: '3.0'
+
+services:
+  servico:
+    image: servico
+    container_name: servico
+    build: ./dockerfiles/servico
+    ports:
+      - '3001:3000'
+    volumes:
+      - ./servico:/app
+      - ./imagens:/imagens
+    command: /app/start.sh
+    depends_on:
+      - banco
+      - imagens
+
+  banco:
+    image: postgres
+    container_name: banco
+    hostname: banco
+    volumes:
+      - ./banco:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: 'treeco'
+      POSTGRES_PASSWORD: 'FaGQFchCiSh4Cce3JjucFiu5z5ybtytm!'
+    ports:
+      - '3002:5432'
+
+  imagens:
+    image: imagens
+    build: ./dockerfiles/imagens/
+    hostname: imagens
+    container_name: imagens
+    volumes:
+      - './imagens:/usr/share/nginx/html'
+    ports:
+      - '3003:80'
+    expose:
+      - '3003'
