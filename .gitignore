@@ -1,4 +1,7 @@
-# compiled output
+# Miscellaneous
+*.env
+
+# Compiled output
 /servico/dist
 /servico/node_modules
 
