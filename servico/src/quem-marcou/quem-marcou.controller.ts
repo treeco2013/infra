@@ -8,7 +8,7 @@ export class QuemMarcouController {
   constructor(private readonly quemMarcouService: QuemMarcouService) {}
 
   @Get(':conta')
-  async encontrar(@Param('conta') conta): Promise<QuemMarcou> {
+  async encontrar(@Param('conta') conta: any): Promise<QuemMarcou> {
     return this.quemMarcouService.encontrar(conta);
   }
 

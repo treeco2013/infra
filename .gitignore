@@ -1,9 +1,10 @@
 # Miscellaneous
 *.env
 
-# Compiled output
+# Compiled/binary output
 /servico/dist
 /servico/node_modules
+/imagens
 
 # Logs
 logs

@@ -20,8 +20,6 @@ export class ImagemService {
     idArvore: number,
     imagem: Express.Multer.File,
   ): Promise<Imagem> {
-    console.log('imagem:', imagem);
-
     const entidade = this.imagemRepository.create({
       arvore: await this.arvoreService.encontrar(idArvore),
       arquivo: imagem.filename,

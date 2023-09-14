@@ -1,17 +1,20 @@
 import { Controller, Get, Param, Post, Put, Delete } from '@nestjs/common';
 import { ArvoreService } from './arvore.service';
 import Arvore from './arvore.entity';
-import { Encriptador } from 'src/utils/encriptador';
+import { EncriptacaoService } from 'src/utils/encriptacao.service';
 
 @Controller('arvore')
 export class ArvoreController {
-  constructor(private readonly arvoreService: ArvoreService) {}
+  constructor(
+    private readonly arvoreService: ArvoreService,
+    private readonly encriptacaoService: EncriptacaoService,
+  ) {}
 
   @Get()
   async listar(): Promise<any> {
     const arvores: Arvore[] = await this.arvoreService.listar();
 
-    return Encriptador.encriptar({
+    return this.encriptacaoService.encriptar({
       quantidade: arvores.length,
       arvores: arvores,
     });
@@ -20,9 +23,9 @@ export class ArvoreController {
   @Get(':dados')
   async encontrar(@Param('dados') dados: any): Promise<any> {
     const arvore: Arvore = await this.arvoreService.encontrar(
-      Number(Encriptador.desencriptar(dados).id),
+      Number(this.encriptacaoService.desencriptar(dados).id),
     );
-    return Encriptador.encriptar({
+    return this.encriptacaoService.encriptar({
       encontrada: arvore != null,
       arvore: arvore,
     });
@@ -31,19 +34,19 @@ export class ArvoreController {
   @Post(':dados')
   async adicionar(@Param('dados') dados: any): Promise<any> {
     const adicionado: Arvore = await this.arvoreService.adicionar(
-      Encriptador.desencriptar(dados),
+      this.encriptacaoService.desencriptar(dados),
     );
 
-    return Encriptador.encriptar({ sucesso: adicionado != null });
+    return this.encriptacaoService.encriptar({ sucesso: adicionado != null });
   }
 
   @Put(':dados')
   async atualizar(@Param('dados') dados: any): Promise<any> {
     const atualizados: number = await this.arvoreService.atualizar(
-      Encriptador.desencriptar(dados),
+      this.encriptacaoService.desencriptar(dados),
     );
 
-    return Encriptador.encriptar({
+    return this.encriptacaoService.encriptar({
       sucesso: atualizados > 0,
       atualizados: atualizados,
     });
@@ -52,9 +55,12 @@ export class ArvoreController {
   @Delete(':dados')
   async remover(@Param('dados') dados: any): Promise<any> {
     const apagados: number = await this.arvoreService.remover(
-      Number(Encriptador.desencriptar(dados).id),
+      Number(this.encriptacaoService.desencriptar(dados).id),
     );
 
-    return Encriptador.encriptar({ sucesso: apagados > 0, apagados: apagados });
+    return this.encriptacaoService.encriptar({
+      sucesso: apagados > 0,
+      apagados: apagados,
+    });
   }
 }

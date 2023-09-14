@@ -3,24 +3,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 
-import * as Joi from '@hapi/joi';
 import { DatabaseModule } from './db.module';
 import { ArvoreModule } from './arvore/arvore.module';
 import { QuemMarcouModule } from './quem-marcou/quem-marcou.module';
 import { ImagemModule } from './imagem/imagem.module';
+import { EncriptacaoModule } from './utils/encriptacao.module';
+import configuracao from './configuracao';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      validationSchema: Joi.object({
-        DB_HOST: Joi.string().required(),
-        DB_PORT: Joi.number().required(),
-        DB_USERNAME: Joi.string().required(),
-        DB_PASSWORD: Joi.string().required(),
-        DB_NAME: Joi.string().required(),
-        IMAGENS_HOST: Joi.string().required(),
-      }),
+      load: [configuracao],
+      isGlobal: true,
     }),
+    EncriptacaoModule,
     DatabaseModule,
     ArvoreModule,
     QuemMarcouModule,
