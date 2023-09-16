@@ -6,6 +6,11 @@
 /servico/node_modules
 /imagens
 
+# Keys
+/certificado
+rsa*
+*.pem
+
 # Logs
 logs
 *.log
