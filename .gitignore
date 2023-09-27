@@ -1,5 +1,6 @@
 # Miscellaneous
 *.env
+atualizar_dockerhub.sh
 
 # Compiled/binary output
 /servico/dist
