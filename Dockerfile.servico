@@ -6,9 +6,13 @@ RUN npm --version
 RUN addgroup --system --gid 1001 treeco
 RUN adduser --system --uid 1001 treeco
 
+RUN mkdir /app
 WORKDIR /app
 RUN mkdir /imagens
 
+COPY ./servico /app
+
 RUN chown -R treeco:treeco /app
 RUN chown -R treeco:treeco /imagens
+
 

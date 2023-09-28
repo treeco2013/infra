@@ -1,10 +1,12 @@
-version: '3.0'
+version: '3.3'
 
 services:
   servico:
     image: treeco/servico
     container_name: servico
-    build: ./dockerfiles/servico
+    build: 
+      dockerfile: ./Dockerfile.servico
+      context: .
     ports:
       - '3001:3000'
     volumes:
@@ -18,7 +20,9 @@ services:
   banco:
     image: treeco/banco
     container_name: banco
-    build: ./dockerfiles/banco
+    build: 
+      dockerfile: ./Dockerfile.banco
+      context: .
     hostname: banco
     volumes:
       - ./banco:/docker-entrypoint-initdb.d
@@ -30,9 +34,11 @@ services:
 
   imagens:
     image: treeco/imagens
-    build: ./dockerfiles/imagens/
-    hostname: imagens
     container_name: imagens
+    build: 
+      dockerfile: ./Dockerfile.imagens
+      context: .
+    hostname: imagens
     volumes:
       - './imagens:/usr/share/nginx/html'
     ports:
