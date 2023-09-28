@@ -11,8 +11,9 @@ WORKDIR /app
 RUN mkdir /imagens
 
 COPY ./servico /app
+RUN rm /app/package-lock.json
+RUN rm /app/node_modules -rf
+RUN npm install
 
-RUN chown -R treeco:treeco /app
+RUN chown -R treeco:treeco /app/src
 RUN chown -R treeco:treeco /imagens
-
-
