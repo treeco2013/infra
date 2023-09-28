@@ -18,9 +18,6 @@ services:
     image: treeco/banco
     container_name: banco
     hostname: banco
-  environment:
-    POSTGRES_USER: 'treeco'
-    POSTGRES_PASSWORD: 'FaGQFchCiSh4Cce3JjucFiu5z5ybtytm!'
       
   imagens:
     image: treeco/imagens

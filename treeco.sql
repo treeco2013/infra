@@ -1,9 +1,3 @@
--- DROP SCHEMA public;
-
-CREATE SCHEMA public AUTHORIZATION pg_database_owner;
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
 -- DROP SEQUENCE public.arvores_id_seq;
 
 CREATE SEQUENCE public.arvores_id_seq

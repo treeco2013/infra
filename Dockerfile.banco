@@ -1,4 +1,7 @@
 FROM postgres:latest
 
+ENV POSTGRES_USER: 'treeco'
+ENV POSTGRES_PASSWORD 'FaGQFchCiSh4Cce3JjucFiu5z5ybtytm!'
+ENV POSTGRES_DB 'treeco'
 
-
+COPY treeco.sql /docker-entrypoint-initdb.d/
