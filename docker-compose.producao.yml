@@ -4,7 +4,6 @@ services:
   servico:
     image: treeco/servico
     container_name: servico
-    build: ./dockerfiles/servico
     ports:
       - '3001:3000'
     expose:
@@ -21,7 +20,6 @@ services:
       
   imagens:
     image: treeco/imagens
-    build: ./dockerfiles/imagens/
     hostname: imagens
     container_name: imagens
     ports:
